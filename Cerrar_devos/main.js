@@ -4,11 +4,10 @@ const {postCloseClaim} = require('./modules/https.js')
 const {convertDateToText} = require('./modules/utils.js')
 const {claimStateValidation, hasAReturnValidation, hasDaysToExpire} = require('./modules/validations.js')
 
-const claimId = 5177982168 // Write the claim Id as an integer
+const claimId = 5179476762 // Write the claim Id as an integer
 
 const claimData = [
     claimId,
-    '',
     '',
     '',
     '\n'
@@ -29,7 +28,7 @@ const closeClaim = async (claimId) => {
             // Close claim
             try {
                 const responseStatus = await postCloseClaim(claimId, data.buyerId)
-                responseStatus == 201 ? claimData[3] = 'E Done' : console.log("Failed to close claim.")
+                responseStatus == 201 ? claimData[2] = 'Done' : console.log("Failed to close claim.")
 
             } catch(error){
                 console.log(error)
