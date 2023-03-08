@@ -4,7 +4,7 @@ const {postCloseClaim} = require('./modules/https.js')
 const {convertDateToText} = require('./modules/utils.js')
 const {claimStateValidation, hasAReturnValidation, hasDaysToExpire} = require('./modules/validations.js')
 
-const claimId = 5179476762 // Write the claim Id as an integer
+const claimId = 5179500854// Write the claim Id as an integer
 
 const claimData = [
     claimId,
