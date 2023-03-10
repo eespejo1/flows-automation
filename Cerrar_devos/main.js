@@ -2,12 +2,17 @@ const mainData = require('./modules/mainDataCreation.js')
 const {writeCsv} = require('./modules/csvOperations.js')
 const {postCloseClaim} = require('./modules/https.js')
 const {convertDateToText} = require('./modules/utils.js')
-const {claimStateValidation, hasAReturnValidation, hasDaysToExpire} = require('./modules/validations.js')
+const {claimStateValidation, hasAReturnValidation} = require('./modules/validations.js')
 
-const claimId = 5179500854// Write the claim Id as an integer
+const claimId = 5179761254
+
+
+// Write the claim Id as an integer
 
 const claimData = [
+    '',
     claimId,
+    '',
     '',
     '',
     '\n'
@@ -18,17 +23,18 @@ const closeClaim = async (claimId) => {
         const data = await mainData(claimId)
         console.log(data)
 
-        claimData[1] = convertDateToText(data.untilDate)
+        claimData[0] = data.orderId
+        claimData[2] = data.buyerId
+        claimData[3] = convertDateToText(data.untilDate)
 
         if (claimStateValidation(data.nameState, claimData) 
-            && !hasAReturnValidation(data.hasAReturn, claimData) 
-            && hasDaysToExpire(data.hasDaysToExpire, claimData)) {
+            && !hasAReturnValidation(data.hasAReturn, claimData)) {
 
-            console.log(data.hasDaysToExpire, "close claim")
+            console.log("close claim")
             // Close claim
             try {
                 const responseStatus = await postCloseClaim(claimId, data.buyerId)
-                responseStatus == 201 ? claimData[2] = 'Done' : console.log("Failed to close claim.")
+                responseStatus == 201 ? claimData[4] = 'Done' : console.log("Failed to close claim.")
 
             } catch(error){
                 console.log(error)
