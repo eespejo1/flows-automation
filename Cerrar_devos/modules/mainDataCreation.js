@@ -2,7 +2,6 @@ const {getClaimObj, getOrderObj, getReturnObj, getReturnStateObj, getBppObject} 
 const { daysToExpire } = require('./utils')
 
 const mainData = async (claimId) => {
-    //console.log(claimId)
     try {
         // claim data
         //console.log(claimId)

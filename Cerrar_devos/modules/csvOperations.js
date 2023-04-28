@@ -8,9 +8,7 @@ const readCsv = async (inputFile) => {
         fs.createReadStream(inputFile)
             .pipe(csv())
             .on('data', data => {
-                if(data['claimCerrado'] == "" && data['test'] !== 'TRUE' && data['claimId'] != '') {
-                    results.push(data)
-                }
+                results.push(data)
             })
             .on('end', () => {
                resolve(results)
@@ -24,7 +22,7 @@ const readCsv = async (inputFile) => {
 const writeCsv = (data) => {
     const csv = data.join(',')
 
-    fs.appendFile('data.csv', csv, (err) => {
+    fs.appendFile('outputData.csv', csv, (err) => {
         if(err) throw err
         console.log('Data appended!')
     })
